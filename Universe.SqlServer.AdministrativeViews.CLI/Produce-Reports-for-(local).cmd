@@ -1,0 +1,1 @@
+dotnet run -c Release -f net6.0 -- -s "(local)" -av -o "Administrative Views\Local\Server" 

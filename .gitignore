@@ -5,6 +5,7 @@
 
 Query Cache Reports
 System Views Reports
+Administrative Views
 # User-specific files
 *.rsuser
 *.suo
