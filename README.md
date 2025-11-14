@@ -1,2 +1,2 @@
 # Universe.SqlServerQueryCache
-MS SQL Server QueryCache Visualisation. Supports 2005...2022.
+MS SQL Server Administrative System Views Visualisation as interactive single-file html report. Supports 2005...2025.

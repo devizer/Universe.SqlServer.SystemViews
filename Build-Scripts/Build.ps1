@@ -1,4 +1,4 @@
-. ./Set-Variables.ps1
+. $PSScriptRoot/Set-Variables.ps1
 $branch = & { git rev-parse --abbrev-ref HEAD }
 echo "Branch: [$branch]"
 
