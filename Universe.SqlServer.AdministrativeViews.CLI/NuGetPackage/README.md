@@ -14,11 +14,11 @@ This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.
 To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell module **SqlServer-Version-Management**, https://www.powershellgallery.com/packages/SqlServer-Version-Management
 
 ## Installation
-```dotnet tool install --global SqlServer.AdministrativeViews```
+```dotnet tool install --global SqlServer.AdministrativeViews.CLI```
 
 or 
 
-```dotnet tool update --global SqlServer.AdministrativeViews```
+```dotnet tool update --global SqlServer.AdministrativeViews.CLI```
 
 ## Example
 ```
@@ -34,15 +34,14 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{Instanc
 -h, -?, --help
 ```
 
-```--all-local-servers```
-Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and ```SQLLocalDB``` API.
+```-o "Reports\{InstanceName}"``` ⇢ Write report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed.
 
-```-s "(local)\SQLEXPRESS"```
-Include local SQLEXPRESS instance.
+```--append-version``` ⇢ Append instance version to the above file(s) name.
 
-```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```
-Include local SQL Server on linux.
+```--all-local-servers``` ⇢ Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and ```SQLLocalDB``` API.
 
-Parameters ```-s```, ```-cs``` may be included multiple times.
+```-s "(local)\SQLEXPRESS"``` ⇢ Include local SQLEXPRESS instance.
 
-If multiple SQL Servers are passed an instance name can be inlined into file name as ```{InstanceName}``` placeholder. 
+```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"``` ⇢ Include local SQL Server on linux.
+
+Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
