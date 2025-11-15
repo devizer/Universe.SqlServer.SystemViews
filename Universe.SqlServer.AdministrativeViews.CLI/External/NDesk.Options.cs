@@ -465,25 +465,29 @@ namespace Universe.SqlServer.AdministrativeViews.CLI.External {
 			this.option = optionName;
 		}
 
+#if !(NETCOREAPP || NETSTANDARD)
 		protected OptionException (SerializationInfo info, StreamingContext context)
 			: base (info, context)
 		{
 			this.option = info.GetString ("OptionName");
 		}
+#endif
 
 		public string OptionName {
 			get {return this.option;}
 		}
 
 		// [SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
+#if !(NETCOREAPP || NETSTANDARD)
+        public override void GetObjectData (SerializationInfo info, StreamingContext context)
 		{
 			base.GetObjectData (info, context);
 			info.AddValue ("OptionName", option);
 		}
+#endif
 	}
 
-	public delegate void OptionAction<TKey, TValue> (TKey key, TValue value);
+    public delegate void OptionAction<TKey, TValue> (TKey key, TValue value);
 
 	public class OptionSet : KeyedCollection<string, Option>
 	{
