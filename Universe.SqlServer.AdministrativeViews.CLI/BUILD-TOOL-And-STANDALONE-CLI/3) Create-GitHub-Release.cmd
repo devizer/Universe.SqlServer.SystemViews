@@ -2,7 +2,7 @@ call Set-Environment-Variables.cmd
 if Not Defined BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS Goto :Err
 for /f %%i in (%BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\PUBLIC\VERSION.TXT) do set VERSION=%%i
 
-echo SqlServer Administrative Views standalone release v%VERSION% > %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
+echo SqlServer Administrative Views standalone self-contained release v%VERSION% > %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo.  >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo [SqlServer Administrative Views .NET tool]^(https://www.nuget.org/packages/SqlServer.AdministrativeViews^) is also available: >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
 echo ``` >> %BUILD_SQLSERVER_ADMINISTRATIVE_VIEWS%\Release-Notes.txt
