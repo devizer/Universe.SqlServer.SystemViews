@@ -26,14 +26,6 @@ or
 SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{InstanceName}" -all -av
 ```
 ## Options
-```
--o, --output=VALUE             Optional 'Reports\SQL Server' file name
--av, --append-version          Append SQL Server version to the above file name
--s, --server=VALUE             Specify local or remote SQL Server instance, allow multiple
--cs, --ConnectionString=VALUE  Specify connection string, allow multiple
--all, --all-local-servers      Include all local SQL Servers and all Local DB instances
--h, -?, --help
-```
 
 ⇢ ```-o "Reports\{InstanceName}"```
 Write report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
@@ -51,3 +43,12 @@ Include local SQLEXPRESS instance.
 Include local SQL Server on linux, network, or in the cloud.
 
 Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
+
+```
+-o, --output=VALUE             Optional 'Reports\SQL Server' file name
+-av, --append-version          Append SQL Server version to the above file name
+-s, --server=VALUE             Specify local or remote SQL Server instance, allow multiple
+-cs, --ConnectionString=VALUE  Specify connection string, allow multiple
+-all, --all-local-servers      Include all local SQL Servers and all Local DB instances
+-h, -?, --help
+```
