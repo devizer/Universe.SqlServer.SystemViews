@@ -49,8 +49,8 @@ Parameters ```-s``` (server instance), ```-cs``` (connection string) may be incl
 ```
 
 ## See also
-This dotnet tool is built for .NET 6.0, 8.0, and 10.0 runtime. 
+This dotnet tool is built for .NET 6.0, 8.0, and 10.0 SDK.
 
-Standalone cli tool is also available: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)**
+Standalone cli tool is also available without .NET SDK: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)** 
 
 To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
