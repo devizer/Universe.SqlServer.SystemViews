@@ -35,7 +35,7 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\Reports\{InstanceN
 
 ```-s "(local)\SQLEXPRESS"```  ⇢  Include local SQLEXPRESS instance.
 
-```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```  ⇢  Include local SQL Server on Linux, on a network, or in the cloud.
+```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```  ⇢  Include SQL Server on Linux, on a network, or in the cloud.
 
 Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
 
