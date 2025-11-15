@@ -42,17 +42,18 @@ internal class MainProgram
         bool allLocalServers = false;
         string csFormat = "Data Source={0}; Integrated Security=SSPI; TrustServerCertificate=true; Encrypt=false";
         OptionSet p = new OptionSet()
-            .Add("o=|output=", v => outputFile = v)
-            .Add("s=|server=", v => ConnectionStrings.Add(string.Format(csFormat, v)))
-            .Add("cs=|ConnectionString=", v => ConnectionStrings.Add(v))
-            .Add("av|append-version", v => appendSqlServerVersion = true)
-            .Add("all|all-local-servers", v => allLocalServers = true)
+            .Add("o=|output=", "Optional 'Reports\\SQL Server' file name", v => outputFile = v)
+            .Add("av|append-version", "Append SQL Server version to above file name", v => appendSqlServerVersion = true)
+            .Add("s=|server=", "Specify local or remote SQL Server instance", v => ConnectionStrings.Add(string.Format(csFormat, v)))
+            .Add("cs=|ConnectionString=", "Specify connection string", v => ConnectionStrings.Add(v))
+            .Add("all|all-local-servers", "Include all local SQL Servers and all Local DB instances", v => allLocalServers = true)
             .Add("h|?|help", v => justPrintHelp = true);
 
         
         List<string> extra = p.Parse(args);
         if (justPrintHelp || args.Length == 0)
         {
+            OptionSet.OptionWidth = 33;
             p.WriteOptionDescriptions(Console.Out);
             return 0;
         }
@@ -94,6 +95,7 @@ internal class MainProgram
         int errorReturn = 0;
         foreach (var connectionString in ConnectionStrings)
         {
+            // already include 'on Windows|Linux'
             var mediumVersion = GetMediumVersion(connectionString);
             if (mediumVersion == null)
             {
@@ -113,7 +115,7 @@ internal class MainProgram
                     // Does not supported by net framework
                     // var realOutputFile = outputFile.Replace("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
                     var realOutputFile = outputFile.ReplaceCore("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
-                    if (appendSqlServerVersion) realOutputFile += $" {mediumVersion} on {hostPlatform}";
+                    if (appendSqlServerVersion) realOutputFile += $" {mediumVersion}";
                     CreateDirectoryForFile(realOutputFile);
 
                     e.ExportToFile(realOutputFile + ".html");

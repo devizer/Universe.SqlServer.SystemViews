@@ -15,13 +15,16 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<Description>Visualize queries and execution plans as interactive single-file html report for one or many sql servers. This dotnet tool needs NET 6.0 or NET 8.0 runtime.</Description>
+		<Description>Visualize queries and execution plans as interactive single-file html report for one or many sql servers. This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.</Description>
 	</PropertyGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net6.0' or '$(TargetFramework)' == 'net8.0' or '$(TargetFramework)' == 'net10.0' ">
+  <PropertyGroup Condition=" $(TargetFramework.Contains('.')) and '$(Configuration)' == 'Release' ">
       <PackAsTool>true</PackAsTool>
-      <ToolCommandName>sql-server-administrative-views</ToolCommandName>
+      <ToolCommandName>SqlServer.AdministrativeViews</ToolCommandName>
       <!--<PackageOutputPath>./nupkg</PackageOutputPath>-->
+      <IsPackable>true</IsPackable>
+      <PackageId>SqlServer.AdministrativeViews</PackageId>
+      <Title>SqlServer Administrative Views</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -49,7 +52,6 @@
 
   <PropertyGroup>
 	  <OutputType>Exe</OutputType>
-      <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 </Project>

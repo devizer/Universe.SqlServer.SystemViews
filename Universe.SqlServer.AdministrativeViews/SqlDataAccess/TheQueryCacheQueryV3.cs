@@ -3,7 +3,7 @@
 // TODO: V4 - columns depends on Columns Schema
 public static class TheQueryCacheQueryV3
 {
-    public const string SqlServerQueryCache = @"SELECT -- Query Cache Report https://github.com/devizer/Universe.SqlServerQueryCache
+    public const string SqlServerQueryCache = @"SELECT -- Query Cache Report https://github.com/devizer/Universe.SqlServer.AdministrativeViews
     p.dbid DatabaseId,
     d.name DatabaseName,
     p.objectid ObjectId, /* stored proc, function, or trigger */
