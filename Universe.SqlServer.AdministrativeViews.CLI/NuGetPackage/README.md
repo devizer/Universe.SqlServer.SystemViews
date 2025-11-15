@@ -1,10 +1,7 @@
 # SQL Server Administrative Veiws CLI
 The intended use of the CLI tool is to provide **metrics** and **execution plans** for SQL Server queries for Continuous Integration (CI) scenarios as offline interactive report.
 
-It supports SQL Server 2005...2025. This dotnet tool is built for .NET 6.0, 8.0, and 10.0 runtime.
-
-To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
-
+It supports SQL Server 2005...2025. 
 
 
 # UI Highlights
@@ -50,3 +47,10 @@ Parameters ```-s``` (server instance), ```-cs``` (connection string) may be incl
 -all, --all-local-servers      Include all local SQL Servers and all Local DB instances
 -h, -?, --help
 ```
+
+## See also
+This dotnet tool is built for .NET 6.0, 8.0, and 10.0 runtime. 
+
+Standalone cli tool is also available: **[github releases](https://github.com/devizer/Universe.SqlServer.AdministrativeViews/releases)**
+
+To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell **[SqlServer-Version-Management](https://www.powershellgallery.com/packages/SqlServer-Version-Management)** module. 
