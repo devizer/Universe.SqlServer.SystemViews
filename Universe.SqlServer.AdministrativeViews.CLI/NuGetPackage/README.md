@@ -1,6 +1,17 @@
 # SQL Server Administrative Veiws
-MS SQL Server Administrative System Views Visualisation as interactive single-file html report. Supports SQL Server 2005...2025.
+The intended use of the CLI tool is to provide **metrics** and **execution plans** for SQL Server queries for Continuous Integration (CI) scenarios as offline interactive report.
+
+UI includes 
+* metrics sorting, 
+* database filter,
+* columns chooser,
+* execution plan button,
+* and sql syntax highlighter.
+
+It supports SQL Server 2005...2025.
 This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.
+
+To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell module **SqlServer-Version-Management**, https://www.powershellgallery.com/packages/SqlServer-Version-Management
 
 ## Installation
 ```dotnet tool install --global SqlServer.AdministrativeViews```
@@ -32,6 +43,3 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{Instanc
 Parameters ```-s```, ```-cs``` may be included multiple times.
 
 If multiple SQL Servers are passed an instance name can be inlined into file name as ```{InstanceName}``` placeholder. 
-
-
-
