@@ -23,7 +23,6 @@
       <ToolCommandName>SqlServer.AdministrativeViews</ToolCommandName>
       <!--<PackageOutputPath>./nupkg</PackageOutputPath>-->
       <IsPackable>true</IsPackable>
-      <PackageId>SqlServer.AdministrativeViews</PackageId>
       <Title>SqlServer Administrative Views</Title>
   </PropertyGroup>
 
@@ -52,6 +51,7 @@
 
   <PropertyGroup>
 	  <OutputType>Exe</OutputType>
+      <PackageId>SqlServer.AdministrativeViews</PackageId>
   </PropertyGroup>
 
 </Project>
