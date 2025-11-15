@@ -1,5 +1,5 @@
 . ..\Build-Scripts\Build.ps1 
-$COMPRESSION_LEVEL="9"
+$COMPRESSION_LEVEL="$($ENV:COMPRESSION_LEVEL)"
 
 $rids="linux-musl-arm64 osx-x64 osx-arm64 win-x64 win-x86 win-arm64 linux-x64 linux-arm linux-arm64 linux-musl-x64".Split(' ')
 $rids
