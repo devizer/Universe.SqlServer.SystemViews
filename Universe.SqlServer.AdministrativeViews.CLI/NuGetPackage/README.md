@@ -10,7 +10,7 @@ UI includes:
  • columns chooser.
 
 It supports SQL Server 2005...2025.
-This dotnet tool is built for NET 6.0, 8.0, and 10.0 runtime.
+This dotnet tool is built for .NET 6.0, 8.0, and 10.0 runtime.
 
 To install and configure SQL Server on Azure DevOps pipeline, Github Actions, etc please take a look at powershell module **SqlServer-Version-Management**, https://www.powershellgallery.com/packages/SqlServer-Version-Management
 
@@ -28,10 +28,10 @@ SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\\Reports\\{Instanc
 ## Options
 
 ⇢ ```-o "Reports\{InstanceName}"```
-Write report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
+Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
 
 ⇢ ```--append-version```
-Append instance version to the above file(s) name.
+Append the instance version to the above file(s) name.
 
 ⇢ ```--all-local-servers```
 Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and SQL Local DB management API.
@@ -40,7 +40,7 @@ Include all local sql servers and all Local DB instances. Sql Server Browser ser
 Include local SQLEXPRESS instance.
 
 ⇢ ```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```
-Include local SQL Server on linux, network, or in the cloud.
+Include local SQL Server on Linux, on a network, or in the cloud.
 
 Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
 
