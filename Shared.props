@@ -29,7 +29,7 @@
         <RepositoryUrl>https://github.com/devizer/Universe.SqlServer.AdministrativeViews</RepositoryUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageIconUrl>https://raw.githubusercontent.com/devizer/Universe.SqlServer.AdministrativeViews/main/Icon.png</PackageIconUrl>
-        <PackageTags>mssql query cache administrative system views</PackageTags>
+        <PackageTags>mssql sql server administrative system views query cache execution plan</PackageTags>
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 

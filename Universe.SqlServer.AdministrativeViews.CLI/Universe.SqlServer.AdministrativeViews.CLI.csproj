@@ -24,7 +24,7 @@
       <ToolCommandName>SqlServer.AdministrativeViews</ToolCommandName>
       <!--<PackageOutputPath>./nupkg</PackageOutputPath>-->
       <IsPackable>true</IsPackable>
-      <Title>SqlServer Administrative Views</Title>
+      <Title>SQL Server Administrative Views</Title>
   </PropertyGroup>
   	
   <ItemGroup>
