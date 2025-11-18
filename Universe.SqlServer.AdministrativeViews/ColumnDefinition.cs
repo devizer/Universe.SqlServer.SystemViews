@@ -86,7 +86,7 @@ public class AllSortingDefinitions
             // .AddColumn(CreateSortableColumn("Created At", r => r.CreationTime))
             .AddColumn(CreateSortableColumn("Lifetime", r => r.Lifetime));
 
-        yield return new TableHeaderDefinition("Duration")
+        yield return new TableHeaderDefinition("Duration, µs")
             .SetVisibility(true)
             .AddColumn(CreateSortableColumn("Total", r => r.TotalElapsedTime))
             .AddColumn(CreateSortableColumn("Avg", r => r.AvgElapsedTime))
@@ -94,7 +94,7 @@ public class AllSortingDefinitions
             .AddColumn(CreateSortableColumn("Min", r => r.MinElapsedTime))
             .AddColumn(CreateSortableColumn("Max", r => r.MaxElapsedTime));
 
-        yield return new TableHeaderDefinition("CPU Time")
+        yield return new TableHeaderDefinition("CPU Time, µs")
             .SetVisibility(false)
             .AddColumn(CreateSortableColumn("Total", r => r.TotalWorkerTime))
             .AddColumn(CreateSortableColumn("Avg", r => r.AvgWorkerTime))
@@ -102,7 +102,7 @@ public class AllSortingDefinitions
             .AddColumn(CreateSortableColumn("Min", r => r.MinWorkerTime))
             .AddColumn(CreateSortableColumn("Max", r => r.MaxWorkerTime));
 
-        yield return new TableHeaderDefinition("Logical Reads")
+        yield return new TableHeaderDefinition("Logical Reads, pages")
             .SetVisibility(true)
             .AddColumn(CreateSortableColumn("Total", r => r.TotalLogicalReads))
             .AddColumn(CreateSortableColumn("Avg", r => r.AvgLogicalReads))
@@ -110,7 +110,7 @@ public class AllSortingDefinitions
             .AddColumn(CreateSortableColumn("Min", r => r.MinLogicalReads))
             .AddColumn(CreateSortableColumn("Max", r => r.MaxLogicalReads));
 
-        yield return new TableHeaderDefinition("Physical Reads")
+        yield return new TableHeaderDefinition("Physical Reads, pages")
             .SetVisibility(!ColumnsSchema.HasRows || !ColumnsSchema.HasUsedGrantKb)
             .AddColumn(CreateSortableColumn("Total", r => r.TotalPhysicalReads))
             .AddColumn(CreateSortableColumn("Avg", r => r.AvgPhysicalReads))
@@ -118,7 +118,7 @@ public class AllSortingDefinitions
             .AddColumn(CreateSortableColumn("Min", r => r.MinPhysicalReads))
             .AddColumn(CreateSortableColumn("Max", r => r.MaxPhysicalReads));
 
-        yield return new TableHeaderDefinition("Writes")
+        yield return new TableHeaderDefinition("Writes, pages")
             .AddColumn(CreateSortableColumn("Total", r => r.TotalLogicalWrites))
             .AddColumn(CreateSortableColumn("Avg", r => r.AvgLogicalWrites))
             // .AddColumn(CreateSortableColumn("Last", r => r.LastLogicalWrites))
