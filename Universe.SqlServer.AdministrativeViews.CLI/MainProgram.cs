@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Reflection;
 using Universe.SqlServer.AdministrativeViews.CLI.External;
 using Universe.SqlServer.AdministrativeViews.Exporter;
@@ -86,7 +87,9 @@ internal class MainProgram
                 // Console.WriteLine($"{s} [Service={SqlServiceExtentions.GetServiceName(s.DataSource)}]: {SqlServiceExtentions.CheckServiceStatus(s.DataSource)}");
             }
 
-            Console.WriteLine($"Found online {onlineServers.Length} local SQL Servers: [{string.Join(", ", onlineServers.Select(x => x.DataSource).ToArray())}]");
+            string pluralSuffix = onlineServers.Length > 1 ? "s" : "";
+            var serverCountString = onlineServers.Length == 0 ? "zero" : onlineServers.Length.ToString("0");
+            Console.WriteLine($"Found {serverCountString} local SQL Server{pluralSuffix} online: [{string.Join(", ", onlineServers.Select(x => x.DataSource).ToArray())}]");
             // ConnectionStrings.AddRange(onlineServers.Select(x => string.Format(csFormat, x.DataSource)));
             ConnectionStrings.AddRange(onlineServers.Select(x => x.ConnectionString));
         }
@@ -114,6 +117,7 @@ internal class MainProgram
             };
 
             Console.Write($"Analyzing Query Cache for {GetInstanceName(connectionString)}:");
+            var export1StartAt = Stopwatch.StartNew();
             try
             {
                 var instanceName = GetInstanceName(connectionString);
@@ -131,7 +135,7 @@ internal class MainProgram
                     e.ExportToFile(realOutputFile + ".html");
 
                     // rows = QueryCacheReader.Read(SqlClientFactory.Instance, connectionString).ToArray();
-                    Console.WriteLine(" OK");
+                    Console.WriteLine($" OK, it took {GetHumanDuration(export1StartAt)}");
                     // Medium Version already got, so HostPlatform error is not visualized explicitly
                     var summary = e.Summary;
                     string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {mediumVersion}");
@@ -173,7 +177,7 @@ internal class MainProgram
                     e.Export(TextWriter.Null);
 
                     // rows = QueryCacheReader.Read(SqlClientFactory.Instance, connectionString).ToArray();
-                    Console.WriteLine(" OK");
+                    Console.WriteLine($" OK, it took {GetHumanDuration(export1StartAt)}");
                     // Medium Version already got, so HostPlatform error is not visualized explicitly
                     var summary = e.Summary;
                     string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {mediumVersion}");
@@ -182,13 +186,24 @@ internal class MainProgram
             }
             catch (Exception ex)
             {
-                Console.WriteLine($" {ex.GetExceptionDigest()}");
+                Console.WriteLine($" Failed, it took {GetHumanDuration(export1StartAt)}{Environment.NewLine}{ex.GetExceptionDigest()}");
                 errorReturn++;
             }
 
         }
 
         return errorReturn;
+    }
+
+    private static string GetHumanDuration(Stopwatch export1StartAt)
+    {
+        var msec = export1StartAt.ElapsedMilliseconds;
+        if (msec < 3000)
+            return $"{msec:n0} ms";
+        else if (msec < 60000)
+            return $"{(msec / 1000.0):n2} sec";
+        else
+            return $"{(msec / 1000.0):n1} sec";
     }
 
     static void CreateDirectoryForFile(string fileName)
@@ -219,7 +234,7 @@ internal class MainProgram
 
     static string GetMediumVersion(string connectionString)
     {
-        Console.Write($"Validation connection string for {GetInstanceName(connectionString)}:");
+        Console.Write($"Validating connection for {GetInstanceName(connectionString)}:");
         try
         {
             var man = CreateConnection(connectionString).Manage();
