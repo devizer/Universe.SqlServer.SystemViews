@@ -89,7 +89,9 @@ internal class MainProgram
 
             string pluralSuffix = onlineServers.Length > 1 ? "s" : "";
             var serverCountString = onlineServers.Length == 0 ? "zero" : onlineServers.Length.ToString("0");
-            Console.WriteLine($"Found {serverCountString} local SQL Server{pluralSuffix} online: [{string.Join(", ", onlineServers.Select(x => x.DataSource).ToArray())}]");
+            var onlineServersString = string.Join(", ", onlineServers.Select(x => x.DataSource).ToArray());
+            if (onlineServers.Length == 0) onlineServersString = "none";
+            Console.WriteLine($"Found {serverCountString} local SQL Server{pluralSuffix} online: [{onlineServersString}]");
             // ConnectionStrings.AddRange(onlineServers.Select(x => string.Format(csFormat, x.DataSource)));
             ConnectionStrings.AddRange(onlineServers.Select(x => x.ConnectionString));
         }
@@ -103,7 +105,7 @@ internal class MainProgram
         else
             Console.WriteLine($@"{argPadding}Output File: {outputFile}");
 
-        if (appendSqlServerVersion) Console.WriteLine($@"{argPadding}Append version to file name: true");
+        if (appendSqlServerVersion) Console.WriteLine($@"{argPadding}Append version to file name: On");
 
         int errorReturn = 0;
         foreach (var connectionString in ConnectionStrings)
