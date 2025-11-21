@@ -21,7 +21,7 @@
 
   <PropertyGroup Condition=" $(TargetFramework.Contains('.')) and '$(Configuration)' == 'Release' ">
       <PackAsTool>true</PackAsTool>
-      <ToolCommandName>sqlserver.administrativeviews</ToolCommandName>
+      <ToolCommandName>SqlServer.AdministrativeViews</ToolCommandName>
       <!--<PackageOutputPath>./nupkg</PackageOutputPath>-->
       <IsPackable>true</IsPackable>
       <Title>SQL Server Administrative Views</Title>
