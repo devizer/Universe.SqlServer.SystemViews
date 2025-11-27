@@ -17,15 +17,15 @@ It supports SQL Server 2005...2025 including Local DB.
 ```
 dotnet tool install --global SqlServer.AdministrativeViews
 ```
-or 
-```
-dotnet tool update --global SqlServer.AdministrativeViews
-```
 
 ## Example
 ```
-SqlServer.AdministrativeViews -o "%SYSTEM_ARTIFACTSDIRECTORY%\Reports\{InstanceName}" -all -av
+SqlServer.AdministrativeViews -o "$($ENV:SYSTEM_ARTIFACTSDIRECTORY)\Reports\{InstanceName}" -all -av
+# or 
+dotnet dnx SqlServer.AdministrativeViews -o "$($ENV:GITHUB_TEMP)\Reports\{InstanceName}" -all -av
 ```
+
+GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions and azure devops.
 
 ## Options
 
