@@ -26,7 +26,7 @@ SqlServer.AdministrativeViews -o $report -all
 # or 
 
 $report = "$($ENV:GITHUB_TEMP)\Reports\{InstanceName} {Version} on {Platform}"
-dotnet dnx SqlServer.AdministrativeViews -o $report -all -av
+dotnet dnx SqlServer.AdministrativeViews -o $report -all
 ```
 
 GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions and azure devops.
@@ -34,12 +34,9 @@ GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at th
 ## Options
 
 **```-o "Reports\{InstanceName}"```**  ⇢ 
-Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Additional file name placeholders are `{Version}` and `{Platform}`. Full path is also allowed. Missing folders will be created. 
+Write a report to a file named as sql server or local db instance in the relative folder Report. Full path is also allowed. Missing folders will be created. **{InstanceName}** placeholder is useful if multiple SQL Servers are passed. Additional file name placeholders are **{Version}** and **{Platform}**.
 
-**```--append-version```**  ⇢ 
-Append the instance version to the above file(s) name.
-
-**```--all-local-servers```**  ⇢ 
+**```--all-local-servers```**, **`-all`**  ⇢ 
 Include all local sql servers and all Local DB instances. Sql Server Browser service is not required. All instances are discovered by registry and SQL Local DB management API.
 
 **```-s "(local)\SQLEXPRESS"```**  ⇢ 
@@ -48,17 +45,8 @@ Include local SQLEXPRESS instance.
 **```-cs "TrustServerCertificate=True;Data Source=127.0.0.1,1433;User ID=sa;Password=p@assw0rd!"```**  ⇢ 
 Include SQL Server on Linux, on a network, or in the cloud.
 
-Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
+Parameters ```-s``` (server instance name), ```-cs``` (connection string) may be included multiple times.
 
-
-```
--o, --output=VALUE             Optional 'Reports\SQL Server' file name
--av, --append-version          Append SQL Server version to the above file name
--s, --server=VALUE             Specify local or remote SQL Server instance, allow multiple
--cs, --ConnectionString=VALUE  Specify connection string, allow multiple
--all, --all-local-servers      Include all local SQL Servers and all Local DB instances
--h, -?, --help
-```
 
 ## See also
 This dotnet tool is built for .NET 6.0, 8.0, and 10.0 SDK.
