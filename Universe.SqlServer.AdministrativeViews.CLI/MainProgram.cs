@@ -111,8 +111,8 @@ internal class MainProgram
         foreach (var connectionString in ConnectionStrings)
         {
             // already include 'on Windows|Linux'
-            var mediumVersion = GetMediumVersion(connectionString);
-            if (mediumVersion == null)
+            var versionAndPlatform = GetMediumVersion(connectionString);
+            if (versionAndPlatform == null)
             {
                 errorReturn++;
                 continue;
@@ -131,7 +131,9 @@ internal class MainProgram
                     // Does not supported by net framework
                     // var realOutputFile = outputFile.Replace("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
                     var realOutputFile = outputFile.ReplaceCore("{InstanceName}", SafeFileName.Get(instanceName), StringComparison.OrdinalIgnoreCase);
-                    if (appendSqlServerVersion) realOutputFile += $" {mediumVersion}";
+                    realOutputFile = realOutputFile.ReplaceCore("{Version}", "v" + SafeFileName.Get(versionAndPlatform.MediumVersion), StringComparison.OrdinalIgnoreCase);
+                    realOutputFile = realOutputFile.ReplaceCore("{Platform}", SafeFileName.Get(versionAndPlatform.Platform), StringComparison.OrdinalIgnoreCase);
+                    if (appendSqlServerVersion) realOutputFile += $" {versionAndPlatform}";
                     CreateDirectoryForFile(realOutputFile);
 
                     e.ExportToFile(realOutputFile + ".html");
@@ -140,7 +142,7 @@ internal class MainProgram
                     Console.WriteLine($" OK, it took {GetHumanDuration(export1StartAt)}");
                     // Medium Version already got, so HostPlatform error is not visualized explicitly
                     var summary = e.Summary;
-                    string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {mediumVersion}");
+                    string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {versionAndPlatform}");
                     Console.WriteLine(summaryReport);
 
                     // Sys Info
@@ -148,7 +150,7 @@ internal class MainProgram
                     var summaryReportFull = summaryReport + Environment.NewLine + sqlSysInfo.Format("   ");
                     File.WriteAllText(realOutputFile + ".txt", summaryReportFull);
 
-                    var jsonExport = new { SqlServerVersion = mediumVersion, Summary = e.Summary, ColumnsSchema = e.ColumnsSchema, Queries = e.Rows };
+                    var jsonExport = new { SqlServerVersion = versionAndPlatform, Summary = e.Summary, ColumnsSchema = e.ColumnsSchema, Queries = e.Rows };
                     JsonExtensions.ToJsonFile(realOutputFile + ".json", jsonExport, false, JsonNaming.CamelCase);
 
 
@@ -182,7 +184,7 @@ internal class MainProgram
                     Console.WriteLine($" OK, it took {GetHumanDuration(export1StartAt)}");
                     // Medium Version already got, so HostPlatform error is not visualized explicitly
                     var summary = e.Summary;
-                    string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {mediumVersion}");
+                    string summaryReport = SqlSummaryTextExporter.ExportAsText(summary, $"SQL Server {versionAndPlatform}");
                     Console.WriteLine(summaryReport);
                 }
             }
@@ -234,13 +236,24 @@ internal class MainProgram
         return con;
     }
 
-    static string GetMediumVersion(string connectionString)
+    public class VersionAndPlatform
+    {
+        public string MediumVersion;
+        public string Platform;
+
+        public override string ToString()
+        {
+            return $"v{MediumVersion} on {Platform}";
+        }
+    }
+
+    static VersionAndPlatform GetMediumVersion(string connectionString)
     {
         Console.Write($"Validating connection for {GetInstanceName(connectionString)}:");
         try
         {
             var man = CreateConnection(connectionString).Manage();
-            var ret = "v" + man.MediumServerVersion + " on " + man.HostPlatform;
+            var ret = new VersionAndPlatform() { MediumVersion = man.MediumServerVersion, Platform = man.HostPlatform };
             Console.WriteLine($" OK, {ret}");
             return ret;
         }

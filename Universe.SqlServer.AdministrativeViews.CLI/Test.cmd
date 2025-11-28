@@ -11,7 +11,8 @@ dotnet run -c Release -f %NETV% -- -o "Administrative Views\LOCAL MS SQL SERVER 
 echo.
 dotnet run -c Release -f %NETV% -- -o "Administrative Views\LOCAL MS SQL SERVER V2.json" -s "(local)" -av
 
-dotnet run -c Release -f %NETV% -- -all -av -o "Administrative Views\Discovered {InstanceNaMe}" 
+dotnet run -c Release -f %NETV% -- -all -av -o "Administrative Views\Discovered AV {InstanceNaMe}" 
+dotnet run -c Release -f %NETV% -- -all     -o "Administrative Views\Discovered THE-FULL {InstanceNaMe} {VerSion} on {PlatforM}" 
 
 dotnet run -c Release -f %NETV% -- -s "(local)"
 

@@ -20,9 +20,13 @@ dotnet tool install --global SqlServer.AdministrativeViews
 
 ## Example
 ```
-SqlServer.AdministrativeViews -o "$($ENV:SYSTEM_ARTIFACTSDIRECTORY)\Reports\{InstanceName}" -all -av
+$report = "$($ENV:SYSTEM_ARTIFACTSDIRECTORY)\Reports\{InstanceName} {Version} on {Platform}"
+SqlServer.AdministrativeViews -o $report -all
+
 # or 
-dotnet dnx SqlServer.AdministrativeViews -o "$($ENV:GITHUB_TEMP)\Reports\{InstanceName}" -all -av
+
+$report = "$($ENV:GITHUB_TEMP)\Reports\{InstanceName} {Version} on {Platform}"
+dotnet dnx SqlServer.AdministrativeViews -o $report -all -av
 ```
 
 GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at the beginning and end of each job on github actions and azure devops.
@@ -30,7 +34,7 @@ GITHUB_TEMP and SYSTEM_ARTIFACTSDIRECTORY are directories that are emptied at th
 ## Options
 
 **```-o "Reports\{InstanceName}"```**  ⇢ 
-Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Full path is also allowed. Missing folders will be created.
+Write a report to a file named as sql server or local db instance in the relative folder Report. {InstanceName} placeholder is useful if multiple SQL Servers are passed. Additional file name placeholders are `{Version}` and `{Platform}`. Full path is also allowed. Missing folders will be created. 
 
 **```--append-version```**  ⇢ 
 Append the instance version to the above file(s) name.
@@ -45,6 +49,7 @@ Include local SQLEXPRESS instance.
 Include SQL Server on Linux, on a network, or in the cloud.
 
 Parameters ```-s``` (server instance), ```-cs``` (connection string) may be included multiple times.
+
 
 ```
 -o, --output=VALUE             Optional 'Reports\SQL Server' file name
